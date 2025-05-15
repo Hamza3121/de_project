@@ -1,3 +1,5 @@
+
+import os
 import streamlit as st
 import requests
 import json
@@ -5,7 +7,8 @@ import base64
 
 
 def set_background(image_path):
-    with open(image_path, "rb") as image_file:
+    abs_path = os.path.join(os.path.dirname(__file__), image_path)
+    with open(abs_path, "rb") as image_file:
         encoded = base64.b64encode(image_file.read()).decode()
     css = f"""
     <style>
