@@ -1,0 +1,14 @@
+# Byte-compiled / cache
+__pycache__/
+
+# VS Code / JetBrains IDEs
+.vscode/
+.idea/
+
+# Virtual env
+venv/
+.env/
+
+# __ init __ py cache
+*/__pycache__/
+

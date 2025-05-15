@@ -1,0 +1,110 @@
+{
+  "Australia": [
+    "Adelaide Oval",
+    "Allan Border Field",
+    "Bellerive Oval",
+    "Gabba",
+    "Junction Oval",
+    "Manuka Oval",	
+    "Melbourne Cricket Ground",
+    "North Sydney Oval",
+    "Perth Stadium",
+    "Sydney Cricket Ground",
+    "Western Australia Cricket Association Ground"
+  ],
+  "West Indies": [
+    "Beausejour Stadium",
+    "Brian Lara Stadium",
+    "Coolidge Cricket Ground",
+    "Daren Sammy National Cricket Stadium",
+    "Kensington Oval",
+    "National Cricket Stadium",
+    "Providence Stadium",
+    "Queen's Park Oval",
+    "Sabina Park",
+    "Sir Vivian Richards Stadium",
+    "Warner Park"
+  ],
+  "India": [
+    "Barabati Stadium",
+    "Bharat Ratna Shri Atal Bihari Vajpayee Ekana Cricket Stadium",
+    "Brabourne Stadium",
+    "Dr. Y.S. Rajasekhara Reddy ACA-VDCA Cricket Stadium",
+    "Eden Gardens",
+    "Feroz Shah Kotla",
+    "Green Park",
+    "Himachal Pradesh Cricket Association Stadium",
+    "JSCA International Stadium Complex",
+    "M Chinnaswamy Stadium",
+    "MA Chidambaram Stadium",
+    "Nehru Stadium",
+    "Maharashtra Cricket Association Stadium",
+    "Punjab Cricket Association IS Bindra Stadium",
+    "Punjab Cricket Association Stadium",
+    "Rajiv Gandhi International Stadium",
+    "Sardar Patel Stadium",
+    "Saurashtra Cricket Association Stadium",
+    "Vidarbha Cricket Association Stadium",
+    "Wankhede Stadium"
+  ],
+  "Bangladesh": [
+    "Shere Bangla National Stadium",
+    "Sylhet Stadium"
+  ],
+  "New Zealand": [
+    "Basin Reserve",
+    "Bay Oval",
+    "Eden Park",
+    "Hagley Oval",
+    "McLean Park",
+    "Saxton Oval",
+    "Seddon Park",
+    "University Oval",
+    "Westpac Stadium"
+  ],
+  "England": [
+    "Buffalo Park",
+    "County Ground",
+    "Edgbaston",
+    "Grace Road",
+    "Headingley",
+    "Kennington Oval",
+    "Lord's",
+    "Old Trafford",
+    "The Rose Bowl",
+    "Trent Bridge",
+    "Riverside Ground",
+    "Sophia Gardens",	
+    "The Cooper Associates County Ground"
+  ],
+  "Sri Lanka": [
+    "Galle International Stadium",
+    "Mahinda Rajapaksa International Cricket Stadium",
+    "Pallekele International Cricket Stadium",
+    "P Sara Oval",
+    "R Premadasa Stadium",
+    "Rangiri Dambulla International Stadium",
+    "Sinhalese Sports Club Ground"
+  ],
+  "South Africa": [
+    "Boland Park",
+    "Kingsmead",
+    "New Wanderers Stadium",
+    "Newlands",
+    "Senwes Park",
+    "St George's Park",
+    "SuperSport Park",
+    "The Wanderers Stadium"
+  ],
+  "UAE": [
+    "Dubai International Cricket Stadium",
+    "Sharjah Cricket Stadium",
+    "Sheikh Zayed Stadium"
+  ],
+  "Pakistan": [
+    "Gaddafi Stadium",
+    "Multan Cricket Stadium",
+    "National Stadium",
+    "Rawalpindi Cricket Stadium"
+  ]
+}
