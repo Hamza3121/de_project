@@ -73,7 +73,7 @@ if fields_filled:
         }
 
         try:
-            response = requests.post("http://localhost:8000/predict", json=input_payload)
+            response = requests.post("https://de-project-5p9z.onrender.com/predict", json=input_payload)
             result = response.json()
             st.success(f"🏆 Predicted Winner: **{result['predicted_winner']}**")
         except Exception as e:
