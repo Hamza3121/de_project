@@ -33,7 +33,8 @@ match_types = ['Test', 'T20', 'ODI']
 toss_decisions = ['bat', 'field']
 
 # Load stadiums_by_country.json
-with open("../stadiums_by_country.json", "r") as f:
+json_path = os.path.join(os.path.dirname(__file__), "..", "stadiums_by_country.json")
+with open(json_path, "r") as f:
     stadium_data = json.load(f)
 
 # User Inputs with placeholders
