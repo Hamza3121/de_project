@@ -1,4 +1,5 @@
 
+import os
 from fastapi import FastAPI
 from pydantic import BaseModel
 import joblib
@@ -12,8 +13,11 @@ encoders = None
 @app.on_event("startup")
 def load_assets():
     global model, encoders
-    model = joblib.load("trained_model/model.pkl")
-    encoders = joblib.load("trained_model/encoders.pkl")
+    base_dir = os.path.dirname(__file__)
+    model_path = os.path.join(base_dir, "trained_model", "model.pkl")
+    encoders_path = os.path.join(base_dir, "trained_model", "encoders.pkl")
+    model = joblib.load(model_path)
+    encoders = joblib.load(encoders_path)
     print("Model and encoders loaded")
 
 
