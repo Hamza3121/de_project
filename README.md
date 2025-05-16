@@ -11,26 +11,14 @@ The `pipeline` directory contains three Python files: `data_ingestion.py`, `data
 
 Run the following commands in the same order one by one:
 
-### 1: Data Ingestion
+### 🔁 How to Run the Pipeline
 
-```bash
-python pipeline/data_ingestion.py
-```
+To run the pipeline, go to the **Run Pipeline** page from the Streamlit sidebar and click the **"Run Data Pipeline"** button.
 
-- This will create a new directory named `raw_data` and save all the international matches data of these three formats: **Tests**, **ODIs**, and **T20Is**.
+This will:
+- Automatically download match data in JSON format.
+- Clean and extract match-level information.
+- Add synthetic features like **weather** and **toss alignment**.
+- Save the final dataset in a SQLite database named `final_data.db`.
 
-### 2: Data Cleaning
-
-```bash
-python pipeline/data_cleaning.py
-```
-
-- This will create a new directory named `clean_data` where it will save each format’s data into a separate file, containing **only match-level data**.
-
-### 3: Data Loading
-
-```bash
-python pipeline/data_loading.py
-```
-
-- This will generate a CSV file named `final_data.csv` which contains **all formats’ data combined into a single file**.
+🧹 Temporary folders are deleted after processing to keep the workspace clean.
