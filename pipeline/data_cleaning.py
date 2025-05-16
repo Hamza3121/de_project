@@ -1,6 +1,7 @@
 
 import os
 import json
+import random
 
 clean_dir = "./clean_data"
 os.makedirs(clean_dir, exist_ok=True)
@@ -9,12 +10,33 @@ root_folder = 'raw_data'
 top_teams = ['England', 'India', 'Australia', 'New Zealand', 'Pakistan', 'South Africa', 'Sri Lanka', 'West Indies']
 sub_folders = ['odis_data', 't20i_data', 'tests_data']
 
+weather_conditions = ['Sunny', 'Humid', 'Cold']
+weather_by_country = {
+    "India": "Humid",
+    "Pakistan": "Sunny",
+    "England": "Cold",
+    "Australia": "Sunny",
+    "New Zealand": "Cold",
+    "South Africa": "Sunny",
+    "Sri Lanka": "Humid",
+    "West Indies": "Humid"
+}
+weather_map = {
+    "Sunny": "bat_first",
+    "Humid": "field_first",
+    "Cold": "field_first"
+}
+
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+venue_map_path = os.path.join(BASE_DIR, "venue_map_dict.json")
+stadium_country_map_path = os.path.join(BASE_DIR, "stadiums_by_country.json")
+
 # Load venue_map_dict.json
-with open('./venue_map_dict.json', 'r', encoding='utf-8') as f:
+with open(venue_map_path, 'r', encoding='utf-8') as f:
     venue_map = json.load(f)
 
 # Load stadiums_by_country.json
-with open('stadiums_by_country.json', 'r') as f:
+with open(stadium_country_map_path, 'r') as f:
     stadium_country_map = json.load(f)
 
 # Create reverse map: venue -> country
@@ -35,7 +57,8 @@ for sub_folder in sub_folders:
         with open(json_file_path, 'r', encoding='utf-8') as f:
             try:
                 data = json.load(f)
-                teams = sorted(data['info']['teams'])
+                teams = data['info']['teams']
+                # teams = sorted(data['info']['teams'])
 
                 if teams[0] in top_teams and teams[1] in top_teams:
 
@@ -63,6 +86,14 @@ for sub_folder in sub_folders:
                     else:
                         home_team = venue_country
 
+                    # Weather
+                    weather = weather_by_country.get(home_team)
+                    weather_favour = weather_map.get(weather)
+
+                    # Toss
+                    toss_decision = data['info']['toss']['decision']
+                    toss_aligned = int(weather_favour == f"{toss_decision}_first")
+
                     # Creating match data object
                     match_data = {
                         'match_type': data['info']['match_type'],
@@ -71,7 +102,10 @@ for sub_folder in sub_folders:
                         'venue': venue_name,
                         'home_team': home_team,
                         'toss_winner': data['info']['toss']['winner'],
-                        'toss_decision': data['info']['toss']['decision'],
+                        'toss_decision': toss_decision,
+                        'weather': weather,
+                        'weather_favour': weather_favour,
+                        'toss_aligned_with_weather': toss_aligned,
                         'winner': winner
                     }
                     combined_data.append(match_data)

@@ -4,6 +4,7 @@ import streamlit as st
 import requests
 import json
 import base64
+import subprocess
 
 
 def set_background(image_path):
@@ -31,6 +32,12 @@ st.title("🏏 Cricket Match Winner Predictor")
 top_teams = ['England', 'India', 'Australia', 'New Zealand', 'Pakistan', 'South Africa', 'Sri Lanka', 'West Indies']
 match_types = ['Test', 'T20', 'ODI']
 toss_decisions = ['bat', 'field']
+weather_options = ['Sunny', 'Humid', 'Cold']
+weather_map = {
+    "Sunny": "bat_first",
+    "Humid": "field_first",
+    "Cold": "field_first"
+}
 
 # Load stadiums_by_country.json
 json_path = os.path.join(os.path.dirname(__file__), "..", "stadiums_by_country.json")
@@ -46,6 +53,7 @@ match_type = st.selectbox("Match Type", ["-- Match Type --"] + match_types)
 
 venue_country = st.selectbox("Venue Country", ["-- Venue Country --"] + list(stadium_data.keys()))
 venue = st.selectbox("Venue", ["-- Venue --"] + (stadium_data.get(venue_country, []) if venue_country in stadium_data else []))
+weather = st.selectbox("Weather Condition", ["-- Select Weather --"] + weather_options)
 
 home_team = st.selectbox("Home Team", ["-- Home Team --"] + [t for t in [team_1, team_2] if t not in ["-- Select Team 1 --", "-- Select Team 2 --"]])
 toss_winner = st.selectbox("Toss Winner", ["-- Toss Winner --"] + [t for t in [team_1, team_2] if t not in ["-- Select Team 1 --", "-- Select Team 2 --"]])
@@ -58,20 +66,28 @@ fields_filled = all([
     match_type not in ["-- Match Type --"],
     venue_country not in ["-- Venue Country --"],
     venue not in ["-- Venue --"],
+    weather not in ["-- Select Weather --"],
     home_team not in ["-- Home Team --"],
     toss_winner not in ["-- Toss Winner --"],
     toss_decision not in ["-- Toss Decision --"]
 ])
 
+
 # Prediction
 if fields_filled:
+    weather_favour = weather_map.get(weather)
+    st.caption(f"🎯 Weather likely favours: **{weather_favour}** strategy")
     if st.button("Predict Winner"):
+        toss_aligned_with_weather = int(weather_favour == f"{toss_decision}_first")
         input_payload = {
             "team_1": team_1,
             "team_2": team_2,
             "toss_winner": toss_winner,
             "toss_decision": toss_decision,
             "venue": venue,
+            "weather": weather,
+            "weather_favour": weather_favour,
+            "toss_aligned_with_weather": toss_aligned_with_weather,
             "match_type": match_type,
             "home_team": home_team
         }
