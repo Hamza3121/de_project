@@ -75,9 +75,8 @@ fields_filled = all([
 
 # Prediction
 if fields_filled:
-    weather_favour = weather_map.get(weather)
-    st.caption(f"🎯 Weather likely favours: **{weather_favour}** strategy")
     if st.button("Predict Winner"):
+        weather_favour = weather_map.get(weather)
         toss_aligned_with_weather = int(weather_favour == f"{toss_decision}_first")
         input_payload = {
             "team_1": team_1,

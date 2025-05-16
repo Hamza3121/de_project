@@ -1,6 +1,7 @@
 
 import joblib
 import os
+import sqlite3
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from sklearn.model_selection import train_test_split
@@ -16,7 +17,9 @@ class MatchWinner:
         self.xbg_model = None
 
     def load_data(self):
-        self.df = pd.read_csv(self.data_path)
+        conn = sqlite3.connect(self.data_path)
+        self.df = pd.read_sql_query("SELECT * FROM matches", conn)
+        conn.close()
 
     def encode_features(self):
         team_columns = ['team_1', 'team_2', 'toss_winner', 'home_team']
@@ -75,7 +78,7 @@ class MatchWinner:
 
 
 # Run it
-model = MatchWinner('./final_data.csv')
+model = MatchWinner('./final_data.db')
 model.load_data()
 model.encode_features()
 model.train_model()

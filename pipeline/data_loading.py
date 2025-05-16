@@ -2,6 +2,7 @@
 import os
 import json
 import pandas as pd
+import sqlite3
 
 root_folder = "clean_data"
 all_matches = []
@@ -16,6 +17,12 @@ for json_file in os.listdir(root_folder):
 
 # Exporting data to csv
 df = pd.DataFrame(all_matches)
-df.to_csv("final_data.csv", index=False)
+db_path = os.path.join(os.path.dirname(__file__), "..", "final_data.db")
+conn = sqlite3.connect(db_path)
+df.to_sql("matches", conn, if_exists="replace", index=False)
+conn.close()
 
-print("final_data.csv has been created.")
+print(f"Data saved DB")
+
+# df.to_csv("final_data.csv", index=False)
+# print("final_data.csv has been created.")
