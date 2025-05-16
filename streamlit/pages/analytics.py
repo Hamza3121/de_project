@@ -39,6 +39,32 @@ win_stats = win_stats.sort_values('Win %', ascending=False)
 # Display the DataFrame
 st.dataframe(win_stats.style.format({"Win %": "{:.2f}%"}))
 
+# -------------------- FORMAT-WISE WIN PERCENTAGE --------------------
+st.markdown("---")
+st.subheader("📂 Format-wise Win Percentages")
+
+selected_format = st.selectbox("Select Match Format", ["ODI", "T20", "Test"])
+
+# Filter data for selected format
+format_filtered_df = df[df["match_type"].str.lower() == selected_format.lower()]
+
+# Get win stats for the selected format
+format_teams = pd.unique(format_filtered_df[['team_1', 'team_2']].values.ravel())
+format_matches_played = format_filtered_df['team_1'].value_counts() + format_filtered_df['team_2'].value_counts()
+format_wins = format_filtered_df['winner'].value_counts()
+
+format_win_stats = pd.DataFrame({
+    'Matches Played': format_matches_played,
+    'Matches Won': format_wins
+}).fillna(0)
+
+format_win_stats['Win %'] = (format_win_stats['Matches Won'] / format_win_stats['Matches Played']) * 100
+format_win_stats = format_win_stats.sort_values('Win %', ascending=False)
+
+# Show results
+st.dataframe(format_win_stats.style.format({"Win %": "{:.2f}%"}))
+
+
 # -------------------- HEAD TO HEAD --------------------
 st.markdown("---")
 st.subheader("🤜🤛 Head-to-Head Comparison")
